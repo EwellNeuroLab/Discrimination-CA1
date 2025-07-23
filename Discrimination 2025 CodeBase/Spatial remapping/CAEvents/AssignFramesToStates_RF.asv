@@ -1,0 +1,12 @@
+%% function to assign states to frames for the random foraging experiments
+
+function [States, TrialFrames] = AssignFramesToStates_RF(event, v, v_thresh)
+
+    [TrialStartFrame, TrialStopFrame, context] = ParseTrialsRandomForaging(event, length(v));
+
+    % loop on each trial and assign frames to states
+    ctxts = unique(context); % get contexts
+    for i = 1:length(context)
+
+end
+    
