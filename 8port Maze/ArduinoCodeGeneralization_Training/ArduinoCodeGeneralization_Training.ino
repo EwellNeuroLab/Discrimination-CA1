@@ -1,5 +1,15 @@
-//Gergely Tarcsay, 2023. Arduino code for grouping, 2 rules training. Set MaxStrike to 10 for day 1-2 when any mistake is allowed. Set it to 1 after that. Set TrainingBlock to 800 for only cued trials, set to 8 & 24 for actual cued-noncued training. Set rules in the LEDIdx and PortIdx vectors.
-//Number-location relationship:0 = W, 1 = SW and so on counterclockwise to 7 = NW. Set calibrated valve open time in the ValveOpenTime vector. Trials are randomized in blocks of 8.
+// Gergely Tarcsay, 2025. Arduino code for the discrimination task training. Parameters are initialized for 8 reward ports and 8 LED strip.
+// Set Arduino pins in line 12-15
+// Valve Open Time: duration of TTL that defines the amount of delivered liquid. In our configuration ~ 66 ms corresponds to 10 ul liquid release. Calibration protocol is available in this directory.
+// IRthreshold: AnalogRead is used to monitor when IR beam brakes. For using digitalRead, change the script accordingly.
+// LEDidx: element 1-2 is on in ctxt C, 3-4 in ctxt D. Index refers to index of LEDstrip vector. Change values to define different rules. Note that the code uses A and A' notation. 
+// Portidx: element 1/2 is the rewarded port in ctxt C and D, element 2 in ctxt B. Index refers to index of PortLED/Valve/IRsensor vectors. One port is defined for the generalization regardless of context.
+
+// Same script can be used for the PretrainingI and PretrainingII phases of the training:
+// PreTrainingII: Set TrainingBlock to a high number (e.g. 800). This way, the first 800 will be cued trials (typical # of trials are between 70-150).
+// PreTrainingI, beside setting TrainingBlock (line 9), set MaxStrike to a number that is higher than number of ports (e.g. 10). That way mouse cannot make incorrect trials even when it pokes every port (pokes are not double-counted).
+
+// IMPOTANT NOTE. Trials are randomized in a way that the random number is generator is the A9 analog input (see randomize function). DO NOT CONNECT THIS PIN TO IR SENSORS, otherwise it won't be random anymore.
 
 
 //DO NOT CHANGE THESE PARAMETERS
@@ -23,7 +33,7 @@ int BlockCounter = 1;
 
 //CHANGE ONLY THESE PARAMETERS
 int ValveOpenTime[8] = {66,66,58,58,66,58,66,66}; //valve open time for each port  
-int IRThreshold[8] = {400,400,300,300,300,300,300,360};
+int IRThreshold[8] = {500,500,500,500,500,500,500,500};
 int LEDIdx[4] = {0,1,2,3}; // rule1: W,SW LEDs on, rule2: S, SE LEDs on
 int PortIdx[2] = {5,5}; //rule1-2: Nport
 int TrialType[8] = {0,1,0,1,0,1,0,1}; //init trial type 0 = rule1, 1 = rule2, 2 = rule3, 3 = rule4 length should be the same as randomizetrials
