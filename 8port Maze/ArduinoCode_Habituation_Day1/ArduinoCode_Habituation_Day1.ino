@@ -1,4 +1,4 @@
-//Gergely Tarcsay 2022. Arduino code for Habituation Phase 1 for the separation project.
+// Gergely Tarcsay 2025. Arduino code for first day habituation. Reward is delivered at all 8 ports without the need of nose poke. 
 
 //DO NOT CHANGE THESE PARAMETERS
 int LEDstrip[8] = {12,11,10,9,8,7,6,5}; 
@@ -15,7 +15,7 @@ String command;
 
 //CHANGE ONLY THESE PARAMETERS
 int ValveOpenTime[8] = {66,66,58,58,66,66,66,66}; //valve open time for each port
-int IRThreshold[8] = {150,0,300,0,300,0,240,0};//IR threshold for each port - if broken, value should be higher than threshold
+int IRThreshold[8] = {500,500,500,500,500,500,500,500};//IR threshold for each port - if broken, value should be higher than threshold
 long TimeOut = 300000; //time limit for each round is 5 min
 
 void setup() {
