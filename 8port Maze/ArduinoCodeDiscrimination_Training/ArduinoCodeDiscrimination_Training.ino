@@ -36,7 +36,7 @@ int BlockCounter = 1;
 int ValveOpenTime[8] = {66,66,58,58,66,58,66,66}; //valve open time for each port  
 int IRThreshold[8] = {500,500,500,500,500,500,500,500};
 int LEDIdx[4] = {4,5,6,7}; // rule1: E,NE LEDs on, rule2: N, NW LEDs on
-int PortIdx[2] = {0,4}; //rule1: W reward port, rule2: SE reward port
+int PortIdx[2] = {0,4}; //rule1: W reward port, rule2: E reward port
 
 // Trial blocks
 int TrialType[8] = {0,1,0,1,0,1,0,1}; //init trial type 0 = rule1, 1 = rule2, 2 = rule3, 3 = rule4 length should be the same as randomizetrials
