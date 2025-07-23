@@ -1,0 +1,21 @@
+%% function to decide whether cell's HD and spatial tuning is at the same reward location
+function IsMisMatchTuning = GetHDSpatialRewardTuning(All_d)
+rewTuned= find(~isnan(All_d.HasRewardField));
+IsMisMatchTuning = zeros(length(rewTuned),2);
+Ctrl = zeros(length(rewTuned),1);
+for i = 1:length(rewTuned)
+
+    HD_rew = All_d.RewardLoc{1}(rewTuned(i),~isnan(All_d.RewardLoc{1}(rewTuned(i),:)));
+    PF_rew = All_d.HasRewardField(rewTuned(i));
+
+    if PF_rew == 1 & HD_rew == 2 % dont use cells that have fields at both reward location
+        IsMisMatchTuning(i,1)= 1;
+    elseif PF_rew == 2 & HD_rew == 1
+        IsMisMatchTuning(i,2)= 1;
+    end
+
+    if PF_rew ~= HD_rew && PF_rew ~=3
+
+        
+
+end
