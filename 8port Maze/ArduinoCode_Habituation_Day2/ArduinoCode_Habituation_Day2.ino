@@ -1,4 +1,4 @@
-//Gergely Tarcsay, 2022. Arduino code for pattern separation, habituation phase 2.
+//Gergely Tarcsay, 2025. Arduino code for second day of habituation. Reward delivered at all 8 ports, but nose poke is required.
 
 //DO NOT CHANGE THESE PARAMETERS
 int LEDstrip[8] = {12,11,10,9,8,7,6,5}; 
@@ -16,7 +16,7 @@ String LedState = "off";
 
 //CHANGE ONLY THESE PARAMETERS
 int ValveOpenTime[8] = {66,66,58,58,66,66,66,66}; //valve open time for each port  
-int IRThreshold[8] = {200,0,200,0,300,0,240,0};
+int IRThreshold[8] = {500,500,500,500,500,500,500,500};
 long TimeOut = 300000; //time limit for each round is 5 min
 
 
