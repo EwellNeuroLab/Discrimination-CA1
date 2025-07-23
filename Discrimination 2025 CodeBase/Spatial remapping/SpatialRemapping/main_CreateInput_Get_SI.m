@@ -1,0 +1,51 @@
+%% main script to create field analysis gui input and calculate spatial information
+
+workdir_d = ["F:\Included miniscope Mice\M119\TrainingD11\"  "F:\Included miniscope Mice\M120\TrainingD11\"  "F:\Included miniscope Mice\M292\TrainingD6\"  "F:\Included miniscope Mice\M319\TrainingD7\" "D:\Grouping First\M231\TrainingD9\" "D:\Grouping First\M314\Training_Separation_D5\" "D:\Grouping First\M316\Training_Separation_D6\"  "D:\Grouping First\M318\Training_Separation_D4\" "F:\Included miniscope Mice\M210\TrainingD17\"];
+workdir_g = ["F:\Included miniscope Mice\M119\GroupingD6\" "F:\Included miniscope Mice\M120\GroupingD6\" "F:\Included miniscope Mice\M292\GroupingD3\" "F:\Included miniscope Mice\M319\GroupingD4\" "D:\Grouping First\M231\GroupingD5\" "D:\Grouping First\M314\GroupingD3\" "D:\Grouping First\M316\GroupingD3\" "D:\Grouping First\M318\GroupingD3\" ];
+discrimination = [1 1 1 1 2 2 2 2 1];
+grouping = [2 2 2 2 1 1 1 1 0];
+Sex = ["f" "f" "f" "m" "f" "m" "m" "m"];
+colors = ["#CAEA3B" "#93EB74" "#BCEAC5" "#6C1FEB" "#875FEA" "#D093EB" ];
+
+SpatialInfo_D = Wrap_SI(workdir_d,discrimination);
+SpatialInfo_G = Wrap_SI(workdir_g,discrimination);
+
+
+%% plot spatial info distribution
+close all
+figure
+tiledlayout(1,3)
+
+nexttile;
+hold on
+
+[yd,xd]  =ecdf(SpatialInfo_D.All);
+plot(xd,yd, LineWidth=3, Color=colors(1))
+
+[yg,xg]  =ecdf(SpatialInfo_G.All);
+plot(xg,yg, LineWidth=3, Color=colors(4))
+
+box off
+xlabel("SI score")
+ylabel("Portion")
+legend("Discrimination", "Grouping", "Location","southeast")
+
+
+for i  =1:2
+nexttile;
+hold on
+[yd,xd]  =ecdf(SpatialInfo_D.Cohort{i});
+plot(xd,yd, LineWidth=3, Color=colors(1+i))
+
+[yg,xg]  =ecdf(SpatialInfo_G.Cohort{i});
+plot(xg,yg, LineWidth=3, Color=colors(4+i))
+
+box off
+xlabel("SI score")
+ylabel("Portion")
+legend("Discrimination", "Grouping", "Location","southeast")
+end
+
+
+
+
