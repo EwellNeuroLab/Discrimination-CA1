@@ -1,16 +1,19 @@
 %% main script to identify cells that are tuned to heading-direction
 
+main_path = "G:\"; % change this only
+rootdir(1) = strcat(main_path, "\CA1 miniscope data\");
+addpath(strcat(main_path, "Discrimination 2025 CodeBase\Heading_direction\GetHDCells"))
 % define folders
 rootdir = strings(2,1);
 folders = strings(4,2);
-rootdir(1) = "F:\Included miniscope Mice\";
-%folders(:,1) = ["\M119\TrainingD11\" "\M119\GroupingD6\" "\M120\TrainingD11\" "\M120\GroupingD6\" "\M292\TrainingD6\" "\M292\GroupingD3\" "M319\TrainingD7\"  "M319\GroupingD4\" "M210\TrainingD17\"];
-folders(:,1) = ["\M119\TrainingD3\"  "\M120\TrainingD3\"  "\M292\TrainingD2\"  "M319\TrainingD2\" ];
+
+folders(:,1) = ["\M119\TrainingD11\" "\M119\GroupingD6\" "\M120\TrainingD11\" "\M120\GroupingD6\" "\M292\TrainingD6\" "\M292\GroupingD3\" "M319\TrainingD7\"  "M319\GroupingD4\" "M210\TrainingD17\"];
+%folders(:,1) = ["\M119\TrainingD3\"  "\M120\TrainingD3\"  "\M292\TrainingD2\"  "M319\TrainingD2\" ];
 
 
-rootdir(2) = "D:\Grouping First\";
-%folders(:,2) = ["\M231\GroupingD5\" "\M231\TrainingD9\" "\M314\Training_Separation_D5\" "\M314\GroupingD3\" "\M316\Training_Separation_D6\" "\M316\GroupingD3\" "M318\Training_Separation_D4\"  "M318\GroupingD3\" ""];
-folders(:,2) = ["\M231\TrainingD2\" "\M314\Training_Separation_D2\"  "\M316\Training_Separation_D2\" "M318\Training_Separation_D2\" ];
+rootdir(2) = rootdir(1);
+folders(:,2) = ["\M231\GroupingD5\" "\M231\TrainingD9\" "\M314\Training_Separation_D5\" "\M314\GroupingD3\" "\M316\Training_Separation_D6\" "\M316\GroupingD3\" "M318\Training_Separation_D4\"  "M318\GroupingD3\" ""];
+%folders(:,2) = ["\M231\TrainingD2\" "\M314\Training_Separation_D2\"  "\M316\Training_Separation_D2\" "M318\Training_Separation_D2\" ];
 %nFiles  = [9 8]; %
 nFiles  = [4 4];
 %set parameters
@@ -92,4 +95,5 @@ for r= 1:2
         end
             save(strcat(workdir, "/processedData/HDanalysis.mat"), "HD_table", "RV", "HDir_Rate",  "HDirOccupancy", "EventHDir","binned_HDir", "edges", "binCenter", "Rew", "RefPoint", "rotXY", "theta")
     end
+
 end
