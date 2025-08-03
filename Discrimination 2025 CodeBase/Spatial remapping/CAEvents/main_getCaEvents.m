@@ -5,7 +5,7 @@
 
 main_path = "G:\"; % change this according to your path
 rootdir = strcat(main_path, "\CA1 miniscope data"); 
-addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping GT\CaEvents"))
+addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping\CaEvents"))
 
 folders = cell(2,1); % folder struct for D1 and G1 cohorts
 
@@ -85,4 +85,5 @@ for coh = 1:2
     end
 
 end
+
 
