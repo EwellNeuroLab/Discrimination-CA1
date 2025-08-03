@@ -10,7 +10,7 @@ main_path = "G:\"; % change this only
 rootdir = strings(2,1);
 rootdir(1) = strcat(main_path, "\CA1 miniscope data\");
 rootdir(2) = rootdir(1); % use same for grouping first cohort
-addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping GT\SpatialRemapping"))
+addpath(strcat(main_path, "Discrimination 2025 CodeBase\Rate remapping\"))
 
 %% load GUI output & onset file
 
@@ -78,3 +78,4 @@ for r = 1:2
     end
 
 end
+
