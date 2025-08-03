@@ -1,7 +1,9 @@
 %% main script to create field analysis gui input and calculate spatial information
+rootdir = "G:\CA1 miniscope data"; % change this according to your path
+addpath(strcat(rootdir, "Discrimination 2025 CodeBase\Spatial remapping GT\SpatialRemapping"))
 
-workdir_d = ["F:\Included miniscope Mice\M119\TrainingD11\"  "F:\Included miniscope Mice\M120\TrainingD11\"  "F:\Included miniscope Mice\M292\TrainingD6\"  "F:\Included miniscope Mice\M319\TrainingD7\" "D:\Grouping First\M231\TrainingD9\" "D:\Grouping First\M314\Training_Separation_D5\" "D:\Grouping First\M316\Training_Separation_D6\"  "D:\Grouping First\M318\Training_Separation_D4\" "F:\Included miniscope Mice\M210\TrainingD17\"];
-workdir_g = ["F:\Included miniscope Mice\M119\GroupingD6\" "F:\Included miniscope Mice\M120\GroupingD6\" "F:\Included miniscope Mice\M292\GroupingD3\" "F:\Included miniscope Mice\M319\GroupingD4\" "D:\Grouping First\M231\GroupingD5\" "D:\Grouping First\M314\GroupingD3\" "D:\Grouping First\M316\GroupingD3\" "D:\Grouping First\M318\GroupingD3\" ];
+workdir_d = [strcat(rootdir,"\M119\TrainingD11\")  strcat(rootdir,"\M120\TrainingD11\")  strcat(rootdir,"\M292\TrainingD6\")  strcat(rootdir,"\M319\TrainingD7\") strcat(rootdir,"\M231\TrainingD9\") strcat(rootdir,"\M314\Training_Separation_D5\") strcat(rootdir,"\M316\Training_Separation_D6\")  strcat(rootdir,"\M318\Training_Separation_D4\") strcat(rootdir,"\M210\TrainingD17\")];
+workdir_g = [strcat(rootdir,"\M119\GroupingD6\") strcat(rootdir,"\M120\GroupingD6\") strcat(rootdir,"\M292\GroupingD3\") strcat(rootdir,"\M319\GroupingD4\") strcat(rootdir,"\M231\GroupingD5\") strcat(rootdir,"\M314\GroupingD3\") strcat(rootdir,"\M316\GroupingD3\") strcat(rootdir,"\M318\GroupingD3\") ];
 discrimination = [1 1 1 1 2 2 2 2 1];
 grouping = [2 2 2 2 1 1 1 1 0];
 Sex = ["f" "f" "f" "m" "f" "m" "m" "m"];
@@ -45,6 +47,7 @@ xlabel("SI score")
 ylabel("Portion")
 legend("Discrimination", "Grouping", "Location","southeast")
 end
+
 
 
 
