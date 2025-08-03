@@ -2,6 +2,8 @@
 
 %% 0. load data & set params
 rootdir = "G:\CA1 miniscope data"; % change this according to your path
+addpath(strcat(rootdir, "Discrimination 2025 CodeBase\Spatial remapping GT\StabilityAnalysis"))
+
 folders = cell(2,1); % folder struct for D1 and G1 cohorts
 
 % D1 cohort
@@ -118,5 +120,6 @@ function [Pearsons_within, Fishers_within] = GetSplittedPearsons(RateMap_splitte
         end
     end
     
+
 
 end
