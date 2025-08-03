@@ -2,7 +2,7 @@
 
 main_path = "G:\";
 rootdir = strcat(main_path,\CA1 miniscope data"); % change this according to your path
-addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping GT\SpatialRemapping"))
+addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping\SpatialRemapping"))
 
 workdir_d = [strcat(rootdir,"\M119\TrainingD11\")  strcat(rootdir,"\M120\TrainingD11\")  strcat(rootdir,"\M292\TrainingD6\")  strcat(rootdir,"\M319\TrainingD7\") strcat(rootdir,"\M231\TrainingD9\") strcat(rootdir,"\M314\Training_Separation_D5\") strcat(rootdir,"\M316\Training_Separation_D6\")  strcat(rootdir,"\M318\Training_Separation_D4\") strcat(rootdir,"\M210\TrainingD17\")];
 workdir_g = [strcat(rootdir,"\M119\GroupingD6\") strcat(rootdir,"\M120\GroupingD6\") strcat(rootdir,"\M292\GroupingD3\") strcat(rootdir,"\M319\GroupingD4\") strcat(rootdir,"\M231\GroupingD5\") strcat(rootdir,"\M314\GroupingD3\") strcat(rootdir,"\M316\GroupingD3\") strcat(rootdir,"\M318\GroupingD3\") ];
@@ -49,6 +49,7 @@ xlabel("SI score")
 ylabel("Portion")
 legend("Discrimination", "Grouping", "Location","southeast")
 end
+
 
 
 
