@@ -1,8 +1,10 @@
 %% Gergely Tarcsay, 2024. Main analysis to classify cells as spatially stable cells after shuffling.
 
 %% 0. load data & set params
-rootdir = "G:\CA1 miniscope data"; % change this according to your path
-addpath(strcat(rootdir, "Discrimination 2025 CodeBase\Spatial remapping GT\StabilityAnalysis"))
+main_path = "G:\"; % change this according to your path
+
+rootdir = strcat(main_path, "\CA1 miniscope data"); 
+addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping GT\StabilityAnalysis"))
 
 folders = cell(2,1); % folder struct for D1 and G1 cohorts
 
@@ -123,3 +125,4 @@ function [Pearsons_within, Fishers_within] = GetSplittedPearsons(RateMap_splitte
 
 
 end
+
