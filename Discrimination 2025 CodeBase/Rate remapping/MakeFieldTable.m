@@ -4,14 +4,19 @@
 %% main function to create a table with the most important field informations
 MaxRZRadius = 5; % measured in bins
 
+rootdir = strings(2,1);
+main_path = "G:\"; % change this only
+
+rootdir = strings(2,1);
+rootdir(1) = strcat(main_path, "\CA1 miniscope data\");
+rootdir(2) = rootdir(1); % use same for grouping first cohort
+addpath(strcat(main_path, "Discrimination 2025 CodeBase\Spatial remapping GT\SpatialRemapping"))
 
 %% load GUI output & onset file
-rootdir = strings(2,1);
+
 folders = strings(9,2);
-rootdir(1) = "F:\Included miniscope Mice\";
 folders(:,1) = ["\M119\TrainingD11\" "\M119\GroupingD6\" "\M120\TrainingD11\" "\M120\GroupingD6\" "\M292\TrainingD6\" "\M292\GroupingD3\" "M319\TrainingD7\"  "M319\GroupingD4\" "M210\TrainingD17\"];
 
-rootdir(2) = "D:\Grouping First\";
 folders(:,2) = ["\M231\GroupingD5\" "\M231\TrainingD9\" "\M314\Training_Separation_D5\" "\M314\GroupingD3\" "\M316\Training_Separation_D6\" "\M316\GroupingD3\" "M318\Training_Separation_D4\"  "M318\GroupingD3\" ""];
 
 Nfiles= [9 8];
@@ -71,4 +76,5 @@ for r = 1:2
 
         save(strcat(workdir,"\processedData\FieldTbl.mat"), "Field_tbl")
     end
+
 end
