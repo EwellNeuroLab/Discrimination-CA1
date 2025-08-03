@@ -1,7 +1,10 @@
-%% main script to detect onsets and split them based on rest/run and ctxt. Gergely Tarcsay, 2024.
-
+%% main script to detect onsets and split them based on rest/run and ctxt. Gergely Tarcsay, 2025. To run this properly, make sure that the rootdir is set.
+%% input data: output of minian (.nc file containing spatial and temporal information for each unit); dlc processed position that contains miniscope frame timestamps as well;
+%% and finally, IsDrifting mat file that is the output of the Drift GUI (DetectDrift) to exclude units with unstable Ca dynamics
 %% 0. Set folders and directory and params
 rootdir = "G:\CA1 miniscope data"; % change this according to your path
+addpath(strcat(rootdir, "Discrimination 2025 CodeBase\Spatial remapping GT\CaEvents"))
+
 folders = cell(2,1); % folder struct for D1 and G1 cohorts
 
 % D1 cohort
@@ -78,4 +81,5 @@ for coh = 1:2
         save(strcat(out, "CaActivity.mat"), "IsDrifting", "v", "XY", "BinnedXY", "XYedges", "States", "TrialFrames", "CaMatrix", "IsNormalDist")
     
     end
+
 end
