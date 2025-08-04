@@ -15,7 +15,7 @@ Codes to visualize analysis on place cells. Run the SpatialRemapping_Notebook.ml
 IMPORTANT. The folder contains additional function (see main_CreateInput_Get_SI.m) script that generates the proper input file for the PlaceField GUI (see RateRemapping folder for details)
 
 
-## Additonal CaEvents
+## Additonal: CaEvents
 The first part of the pipeline that creates CaActivity.mat using the output file from Minian that is not on Google Drive. Files will be shared upon request.
 
 Pipeline: Ca events are detected and assigned to individual camera frames; assign camera frames to behavioral states (e.g. running, foraging, trial # etc.); position is binned for later map contstruction.
