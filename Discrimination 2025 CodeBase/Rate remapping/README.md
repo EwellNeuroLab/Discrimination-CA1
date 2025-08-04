@@ -8,6 +8,8 @@ Pipeline: run the FieldCluster.app. Load a data set (e.g.  ...\CA1 miniscope dat
 
 Output: FieldClustering.mat
 
+Notes: when using the GUI, make sure the PlaceFieldGUI folder is added to the path. Algorithm uses the islocalmax2 function that is available since R2024a.
+
 ## 2. MakeFieldTable.m
 
 Input: FieldClustering.mat
