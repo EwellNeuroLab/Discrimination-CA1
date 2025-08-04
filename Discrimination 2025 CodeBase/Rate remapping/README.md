@@ -10,6 +10,20 @@ Output: FieldClustering.mat
 
 Notes: when using the GUI, make sure the PlaceFieldGUI folder is added to the path. Algorithm uses the islocalmax2 function that is available since R2024a.
 
+### GUI manual
+
+1. Click on the Load Data button on the Cluster Fields tab and select a file (named as PlaceMaps.mat).
+2. Run the clustering algorithm - Gaussian mixture model (recommended) or k-means. This will cluster each place map.
+3. Note. The GMM might gives an error: "Ill-conditioned covariance created at iteration 55". In this case not all the maps will be processed but only the ones up until the error message. If this happens, cluster individual cells in the View Fields tab.
+
+4. Click on the View Fields tab and click Plot Maps to see the full place map and the clustered field maps. To visualize cell activity context-wise, mark the Plot Sessions field (Session 1  = ctxt A/C; Session 2 = ctxt B/D). To visualize the fitted model, mark the Plot pdf field (GMM only). If the cluster looks good, go to the next cell. Toggle between cells by changing the cell ID.
+5. If the clustering was not good, you can rerun the clustering with different parameters.
+6. Splitting fields. If rerunning did not help, go to the manual editing field. Select a field that you want to split. Draw a closed line around the region you want to split.
+7. Merging fields. Select the fields you want to merge (shift+ left click). Click on Merge.
+8. Discard. Select the fields you want to delete, and click on discard.
+9. When finished, click on Save Results to save the file for down-stream analysis.
+10. Analyze fields outside the GUI.
+
 ## 2. MakeFieldTable.m
 
 Input: FieldClustering.mat
