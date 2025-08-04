@@ -32,12 +32,14 @@ Pipeline: generating a table for each place field, containing field id, cell id,
 
 Output: Field_tbl.mat - this table is used to create plots for Figure 4.
 
-## 3. MakeMisMatchTable analysis
+## 3. Mismatch analysis
 
 Use the MakeMismatchTable.m to create results for the mismatch analysis (main_Mismatch.m is old and does not exclude incorrect trials, while MakeMismatchTable.m script does).
 
 Pipeline: calculating rate overlap score for fields close to reward sites. Distuingishes between match (i.e. fires more in A field near rew A), mismatch (i.e. fires more in B field near rew A), or neutral.
 
 Output: Mismatch_tbl that is used to create plot for Figure 4.
+
+
 
 
