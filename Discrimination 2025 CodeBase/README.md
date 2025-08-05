@@ -15,7 +15,7 @@ Each directory has its own description of the different pipelines.
 
 To reproduce Figure 1 and Extended Data Figure 1, run Behavior_codes/behavior_Notebook.mlx (GT).
 
-To reproduce Figure 2d and 2g, run Context decoder/ANNOTATED_runrest_fit_decoders.mlx (JDY).
+To reproduce Figure 2b,d and 2g, run Context decoder/standalone_ANNOTATED_runrest_fit_decoders.mlx (JDY).
 
 To reproduce Figure 3, run Spatial remapping/SpatialRemapping_Notebook.mlx (GT).
 
