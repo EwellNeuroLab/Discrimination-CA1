@@ -1,4 +1,4 @@
-Directory to reproduce figures in the manuscript "The relevance of context in memory tasks influences the magnitude of hippocampal remapping".
+Directory to analysis pipelines used in the manuscript "The relevance of context in memory tasks influences the magnitude of hippocampal remapping" and to reproduce figures.
 
 Necessary data is available on the following link: https://drive.google.com/drive/u/2/folders/1H3Ha-PUaPT1yCAEoGNDM40SY8yg2fRJu
 
