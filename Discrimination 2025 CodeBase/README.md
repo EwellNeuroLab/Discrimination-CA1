@@ -4,7 +4,7 @@ Necessary data is available on the following link: https://drive.google.com/driv
 
 
 ## Dependencies
-Codes were tested in MATLAB R2024b and MATLAB R2025a. The PlaceField GUI requires >= R2024a. Necessary toolboxes:
+Codes were tested in MATLAB R2024b and MATLAB R2025a. Note: use the Behavior_codes in a version older that 2025a. The PlaceField GUI requires >= R2024a. Necessary toolboxes:
 
 * Statistics and Machine Learning Toolbox
 * Image Processing Toolbox
