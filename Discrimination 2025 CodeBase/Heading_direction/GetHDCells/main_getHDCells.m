@@ -1,41 +1,39 @@
 %% main script to identify cells that are tuned to heading-direction
 
-main_path = "C:\Users\ewell\Desktop\TestCodeGitHub\"; % change this only
-
-addpath(strcat(main_path, "Discrimination 2025 CodeBase\Heading_direction\GetHDCells"))
-addpath(strcat(main_path, "Discrimination 2025 CodeBase\Heading_direction\GetHDCells"))
 % define folders
-rootdir = strings(2,1);
 folders = strings(9,2);
-rootdir(1) = strcat(main_path, "\Discrimination 2025 data\CA1 miniscope data\");
-folders(:,1) = ["\M119\TrainingD11\" "\M119\GroupingD6\" "\M120\TrainingD11\" "\M120\GroupingD6\" "\M292\TrainingD6\" "\M292\GroupingD3\" "M319\TrainingD7\"  "M319\GroupingD4\" "M210\TrainingD17\"];
+rootdir = "G:\CA1 miniscope data\";
+folders(:,1) = ["\M119\TrainingD11\" "\M120\TrainingD11\" "\M292\TrainingD6\" "\M319\TrainingD7\" "\M210\TrainingD17\" ... 
+    "\M231\TrainingD9\" "\M314\Training_Separation_D5\" "\M316\Training_Separation_D6\" "\M318\Training_Separation_D4\"];
 
+folders(:,2) = ["\M119\GroupingD6\" "\M120\GroupingD6\" "\M292\GroupingD3\" "\M319\GroupingD4\" ...
+    "\M231\GroupingD5\" "\M314\GroupingD3\" "\M316\GroupingD3\" "\M318\GroupingD3\" ""];
+nFiles= [9 8];
 
-rootdir(2) = rootdir(1);
-folders(:,2) = ["\M231\GroupingD5\" "\M231\TrainingD9\" "\M314\Training_Separation_D5\" "\M314\GroupingD3\" "\M316\Training_Separation_D6\" "\M316\GroupingD3\" "M318\Training_Separation_D4\"  "M318\GroupingD3\" ""];
-nFiles  = [9 8]; %
 %set parameters
 filtSize = 5; % position data is filtered for heading direction calculation, measured in frames
 binwidth = 45; % binwidth of heading direction in degree
 framerate= 30; % camera sampling rate
-repeat  = 2; % repeat shuffling
+repeat  = 500; % repeat shuffling (500 used for the paper)
 minShift = 1*framerate*60; % circular shifting cannot happen +/- this frame interval (change the first number that stands for minutes)
 thresh.pctile = 95; % significance for shuffling
 thresh.stability = 0.4; % cut-off for temporal stability of tuning
 thresh.event = 10; % minimum number of events
+thresh.reconstruction = 1; % threshold for reconstruction analysis
+
 
 %% loop on each session
 for r= 1:2
     for f = 1:nFiles(r)
-        workdir = strcat(rootdir(r), folders(f,r));
+        workdir = strcat(rootdir, folders(f,r));
         disp(workdir)
         %% load files
         dlc_file = dir(fullfile(workdir, '\processedData\ProcessedPosition*.mat'));
         dlc= load(strcat(dlc_file.folder,'\', dlc_file.name));
         XY = dlc.XYT.Position;
         event = readtable(strcat(workdir, "EventFile.csv"));
-        load(strcat(workdir, "\processedData\CaActivity.mat"), "IsDrifting", "States", "CaMatrix", "TrialFrames");
-        load(strcat(workdir, "\processedData\PCAnalysis.mat"), "EventTime", "EventXY");
+        load(strcat(workdir, "\processedData\CaActivity.mat"), "IsDrifting", "States", "CaMatrix", "TrialFrames", "BinnedXY");
+        load(strcat(workdir, "\processedData\PCAnalysis.mat"), "EventTime", "EventXY", "RateMap");
         [all_cell,~]=size(CaMatrix);
         CaMatrix(IsDrifting == 1,:) = []; % get rid of drifting traces
         
@@ -68,7 +66,7 @@ for r= 1:2
         [RV, HDir_Rate, EventHDir] = Get_HDirTuning(EventTime, binned_HDir, HDirOccupancy,Nbins, binCenter,edges);
         VectorRemap = GetVectorRemap(HDir_Rate);
         %% split session and calculate Pearson's between tuning curves: avg of 1st vs 2nd and even vs odd
-        [framesSplitted, Splitted_labels] = SplitSession(TrialFrames, States);
+        [framesSplitted, labels] = SplitSession(TrialFrames, States);
 
         %% measure temporal stability of tuning curves by splitting data
         [Pearsons_stability, Pearsons, HDir_Rate_splitted, HDirOccupancy_splitted] = GetSplittedTuningCurve(EventTime, framesSplitted, binned_HDir, Nbins, framerate, CaMatrix, binCenter,edges);
@@ -84,8 +82,11 @@ for r= 1:2
         RVL_distribution_HDir = ShuffleHD(HDir, minShift, repeat, edges, framesToUse, Nbins, framerate, EventTime, binCenter);
         toc;
 
+        %% do reconstruction analysis (Sarel et al)
+        [placeHD_idx, error_HD, error_RateMap] = ReconstructionAnalysis_Sarel2017(States, binned_HDir, HDir_Rate, BinnedXY, RateMap);
+
         %% get HD cells and create output table
-        HD_table = GetHDCells(RV,RVL_distribution_events,RVL_distribution_HDir, CaMatrix, cellID, VectorRemap, Pearsons_stability, thresh);
+        HD_table = GetHDCells(RV,RVL_distribution_events,RVL_distribution_HDir, CaMatrix, cellID, VectorRemap, Pearsons_stability, placeHD_idx, thresh);
         
         %% save data
         if exist(strcat(workdir, "/processedData/HDanalysis.mat"), "file")
@@ -93,5 +94,4 @@ for r= 1:2
         end
             save(strcat(workdir, "/processedData/HDanalysis.mat"), "HD_table", "RV", "HDir_Rate",  "HDirOccupancy", "EventHDir","binned_HDir", "edges", "binCenter", "Rew", "RefPoint", "rotXY", "theta")
     end
-
 end
