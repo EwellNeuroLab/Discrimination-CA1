@@ -1,3 +1,4 @@
 # Discrimination-CA1
 
-DOI: 10.5281/zenodo.17488388
+[![DOI](https://zenodo.org/badge/1025042134.svg)](https://doi.org/10.5281/zenodo.17488387)
+
