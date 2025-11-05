@@ -1,10 +1,12 @@
 // Gergely Tarcsay 2025. Arduino code for first day habituation. Reward is delivered at all 8 ports without the need of nose poke. 
 
-//DO NOT CHANGE THESE PARAMETERS
+//CHANGE THESE PARAMETERS ONLY IF THE PINS SET UP DIFFERENTLY
 int LEDstrip[8] = {12,11,10,9,8,7,6,5}; 
 int IRSensor[8] = {A0, A1,A2,A3,A4,A5,A6,A7};
 int PortLED[8] = {40,41,42,43,44,45,46,47};     
 int Valve[8] = {30,31,32,33,34,35,36,37};
+
+// DO NOT CHANGE THESE PARAMETERS
 int LEDIdx[8] = {0,1,2,3,4,5,6,7};
 String Position[8] = {"W", "SW", "S", "SE", "E", "NE", "N", "NW"}; // position of ports 
 int LastState[8] = {-1,-1,-1,-1,-1,-1,-1,-1};
@@ -12,11 +14,13 @@ int SensorState = 0;
 String LedState = "off";
 int VisitCounter = 0; //to count the number of port visitations
 String command;
-
-//CHANGE ONLY THESE PARAMETERS
-int ValveOpenTime[8] = {66,66,58,58,66,66,66,66}; //valve open time for each port
-int IRThreshold[8] = {500,500,500,500,500,500,500,500};//IR threshold for each port - if broken, value should be higher than threshold
 long TimeOut = 300000; //time limit for each round is 5 min
+
+
+//CHANGE THESE PARAMETERS
+int ValveOpenTime[8] = {66,66,66,66,66,66,66,66}; //valve open time for each port
+int IRThreshold[8] = {500,500,500,500,500,500,500,500};//IR threshold for each port - if broken, value should be higher than threshold
+int RandomIN = 9; // analog input for random seed. Ensure that this pin is not connected to the maze!
 
 void setup() {
   // put your setup code here, to run once:
@@ -61,7 +65,7 @@ void randomize ( int arr[], int n )
 {
     // Use a different seed value so that we don't get same
     // result each time we run this program. Read from A9 since A0-A7 is used
-    randomSeed(analogRead(9));
+    randomSeed(analogRead(RandomIN));
     
     // Start from the last element and swap one by one. We don't
     // need to run for the first element that's why i > 0
