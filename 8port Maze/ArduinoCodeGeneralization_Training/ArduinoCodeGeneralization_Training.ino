@@ -1,6 +1,6 @@
-// Gergely Tarcsay, 2025. Arduino code for the discrimination task training. Parameters are initialized for 8 reward ports and 8 LED strip.
+// Gergely Tarcsay, 2025. Arduino code for the generalization task training. Parameters are initialized for 8 mouse ports and 8 light strip.
 // Set Arduino pins in line 12-15
-// Valve Open Time: duration of TTL that defines the amount of delivered liquid. In our configuration ~ 66 ms corresponds to 10 ul liquid release. Calibration protocol is available in this directory.
+// Valve Open Time: duration of TTL that defines the amount of delivered liquid. In our configuration ~ 66 ms corresponds to 10 ul liquid release. 
 // IRthreshold: AnalogRead is used to monitor when IR beam brakes. For using digitalRead, change the script accordingly.
 // LEDidx: element 1-2 is on in ctxt C, 3-4 in ctxt D. Index refers to index of LEDstrip vector. Change values to define different rules. Note that the code uses A and A' notation. 
 // Portidx: element 1/2 is the rewarded port in ctxt C and D, element 2 in ctxt B. Index refers to index of PortLED/Valve/IRsensor vectors. One port is defined for the generalization regardless of context.
@@ -12,11 +12,14 @@
 // IMPOTANT NOTE. Trials are randomized in a way that the random number is generator is the A9 analog input (see randomize function). DO NOT CONNECT THIS PIN TO IR SENSORS, otherwise it won't be random anymore.
 
 
-//DO NOT CHANGE THESE PARAMETERS
+//CHANGE THESE PARAMETERS ONLY IF THE PINS SET UP DIFFERENTLY
 int LEDstrip[8] = {12,11,10,9,8,7,6,5}; 
 int IRSensor[8] = {A0, A1,A2,A3,A4,A5,A6,A7};
 int PortLED[8] = {40,41,42,43,44,45,46,47};     
 int Valve[8] = {30,31,32,33,34,35,36,37};
+
+
+// DO NOT CHANGE THESE PARAMETERS
 String Position[8] = {"W", "SW", "S", "SE", "E", "NE", "N", "NW"}; // position of ports
 int LastState[8] = {-1,-1,-1,-1,-1,-1,-1,-1}; //for storing the last sensorstate of each port
 String command; //bonsai msg will be stored here
@@ -31,20 +34,21 @@ int TimeoutCounter =0;
 bool IsTest = 0;
 int BlockCounter = 1;
 
-//CHANGE ONLY THESE PARAMETERS
-int ValveOpenTime[8] = {66,66,58,58,66,58,66,66}; //valve open time for each port  
-int IRThreshold[8] = {500,500,500,500,500,500,500,500};
+//CHANGE THESE PARAMETERS
+int ValveOpenTime[8] = {66,66,66,66,66,66,66,66}; //valve open time for each port  
+int IRThreshold[8] = {500,500,500,500,500,500,500,500}; // do not need to be changed
 int LEDIdx[4] = {0,1,2,3}; // rule1: W,SW LEDs on, rule2: S, SE LEDs on
-int PortIdx[2] = {5,5}; //rule1-2: Nport
-int TrialType[8] = {0,1,0,1,0,1,0,1}; //init trial type 0 = rule1, 1 = rule2, 2 = rule3, 3 = rule4 length should be the same as randomizetrials
+int PortIdx[2] = {5,5}; //rule: both context are rewarded at port 6 (Arduino counts from 0) 
+int TrialType[8] = {0,1,0,1,0,1,0,1}; //init trial type 0 = rule1, 1 = rule2 length should be the same as randomizetrials
 int RandomizeTrials = 8;
 long TimeOut = 60000; //max time in MILLISECONDS that a mouse can spend to find the right port once the sound is on
 int OutputVal = 30; // LED cue brightness. set to 5 for dim light set 250 or higher to bright light (depends on battery life)
 
-int TrainingBlock =0; //  X trials are training - portLED will turn on to guide the mouse. Set it 0 if you don't want any trainin trial.
+int TrainingBlock =8; //  X trials are training - portLED will turn on to guide the mouse. Set it 0 if you don't want any trainin trial.
 int TestingBlock = 24; //testing block - set this to 0 to only have training blocks
 int MaxStrike =1; // mouse has MaxStrike-1 chance to find reward
 
+int RandomIN = 9; // analog input for random seed. Ensure that this pin is not connected to the maze!
 
 void setup() {
   // put your setup code here, to run once:
@@ -91,7 +95,7 @@ void randomize ( int arr[], int n )
 {
     // Use a different seed value so that we don't get same
     // result each time we run this program
-    randomSeed(analogRead(9)); // never use 0-7 as the ports are connected there and won't give you a random value
+    randomSeed(analogRead(RandomIN)); // never use 0-7 as the ports are connected there and won't give you a random value
  
     // Start from the last element and swap one by one. We don't
     // need to run for the first element that's why i > 0
