@@ -1,14 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<WorkflowBuilder Version="2.8.0"
+<WorkflowBuilder Version="2.9.0"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xmlns:vid="clr-namespace:Bonsai.Video;assembly=Bonsai.Video"
                  xmlns:rx="clr-namespace:Bonsai.Reactive;assembly=Bonsai.Core"
                  xmlns:cv="clr-namespace:Bonsai.Vision;assembly=Bonsai.Vision"
                  xmlns:ipy="clr-namespace:Bonsai.Scripting.IronPython;assembly=Bonsai.Scripting.IronPython"
-                 xmlns:al="clr-namespace:Bonsai.Audio;assembly=Bonsai.Audio"
                  xmlns:port="clr-namespace:Bonsai.IO.Ports;assembly=Bonsai.System"
                  xmlns:io="clr-namespace:Bonsai.IO;assembly=Bonsai.System"
-                 xmlns:res="clr-namespace:Bonsai.Resources;assembly=Bonsai.System"
                  xmlns:wie="clr-namespace:Bonsai.Windows.Input;assembly=Bonsai.Windows.Input"
                  xmlns="https://bonsai-rx.org/2018/workflow">
   <Workflow>
@@ -249,14 +247,6 @@ def process(input):
                 <rx:DueTime>PT1S</rx:DueTime>
               </Combinator>
             </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="al:PlaySource">
-                <al:DeviceName>Generic Software on Speakers (Realtek(R) Audio)</al:DeviceName>
-                <al:SourceName>
-                  <al:string>soundSource</al:string>
-                </al:SourceName>
-              </Combinator>
-            </Expression>
             <Expression xsi:type="rx:SelectMany">
               <Name>OpenPort</Name>
               <Workflow>
@@ -431,82 +421,7 @@ def process(value):
                   <Expression xsi:type="MemberSelector">
                     <Selector>Item1</Selector>
                   </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="al:PauseSource">
-                      <al:DeviceName>Generic Software on Speakers (Realtek(R) Audio)</al:DeviceName>
-                      <al:SourceName>
-                        <al:string>soundSource</al:string>
-                      </al:SourceName>
-                    </Combinator>
-                  </Expression>
                   <Expression xsi:type="WorkflowOutput" />
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="al:CreateAudioContext">
-                      <al:DeviceName>Generic Software on Speakers (Realtek(R) Audio)</al:DeviceName>
-                      <al:SampleRate>0</al:SampleRate>
-                      <al:Refresh>0</al:Refresh>
-                      <al:Position>
-                        <al:X>0</al:X>
-                        <al:Y>0</al:Y>
-                        <al:Z>0</al:Z>
-                      </al:Position>
-                      <al:Velocity>
-                        <al:X>0</al:X>
-                        <al:Y>0</al:Y>
-                        <al:Z>0</al:Z>
-                      </al:Velocity>
-                      <al:Direction>
-                        <al:X>-0</al:X>
-                        <al:Y>-0</al:Y>
-                        <al:Z>-1</al:Z>
-                      </al:Direction>
-                      <al:Up>
-                        <al:X>0</al:X>
-                        <al:Y>1</al:Y>
-                        <al:Z>0</al:Z>
-                      </al:Up>
-                      <al:Gain>1</al:Gain>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="al:AudioResources">
-                      <al:Buffers>
-                        <al:BufferConfiguration xsi:type="al:SoundBuffer">
-                          <al:Name>sound</al:Name>
-                          <al:FileName>C:\Users\ewell\Desktop\8port maze\PatternSeparation\Sound\sound10760Hz.wav</al:FileName>
-                        </al:BufferConfiguration>
-                      </al:Buffers>
-                      <al:Sources>
-                        <al:SourceConfiguration>
-                          <al:Name>soundSource</al:Name>
-                          <al:BufferName>sound</al:BufferName>
-                          <al:Gain>1</al:Gain>
-                          <al:Pitch>1</al:Pitch>
-                          <al:Direction>
-                            <al:X>0</al:X>
-                            <al:Y>0</al:Y>
-                            <al:Z>0</al:Z>
-                          </al:Direction>
-                          <al:Position>
-                            <al:X>0</al:X>
-                            <al:Y>0</al:Y>
-                            <al:Z>0</al:Z>
-                          </al:Position>
-                          <al:Velocity>
-                            <al:X>0</al:X>
-                            <al:Y>0</al:Y>
-                            <al:Z>0</al:Z>
-                          </al:Velocity>
-                          <al:Looping>true</al:Looping>
-                          <al:Relative>false</al:Relative>
-                          <al:State>Initial</al:State>
-                        </al:SourceConfiguration>
-                      </al:Sources>
-                    </Combinator>
-                  </Expression>
-                  <Expression xsi:type="Combinator">
-                    <Combinator xsi:type="res:LoadResources" />
-                  </Expression>
                 </Nodes>
                 <Edges>
                   <Edge From="0" To="4" Label="Source1" />
@@ -519,9 +434,6 @@ def process(value):
                   <Edge From="7" To="8" Label="Source1" />
                   <Edge From="9" To="10" Label="Source1" />
                   <Edge From="10" To="11" Label="Source1" />
-                  <Edge From="11" To="12" Label="Source1" />
-                  <Edge From="13" To="14" Label="Source1" />
-                  <Edge From="14" To="15" Label="Source1" />
                 </Edges>
               </Workflow>
             </Expression>
@@ -548,73 +460,6 @@ def process(value):
                   <Edge From="0" To="1" Label="Source1" />
                 </Edges>
               </Workflow>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="al:CreateAudioContext">
-                <al:DeviceName>Generic Software on Speakers (Realtek(R) Audio)</al:DeviceName>
-                <al:SampleRate>0</al:SampleRate>
-                <al:Refresh>0</al:Refresh>
-                <al:Position>
-                  <al:X>0</al:X>
-                  <al:Y>0</al:Y>
-                  <al:Z>0</al:Z>
-                </al:Position>
-                <al:Velocity>
-                  <al:X>0</al:X>
-                  <al:Y>0</al:Y>
-                  <al:Z>0</al:Z>
-                </al:Velocity>
-                <al:Direction>
-                  <al:X>-0</al:X>
-                  <al:Y>-0</al:Y>
-                  <al:Z>-1</al:Z>
-                </al:Direction>
-                <al:Up>
-                  <al:X>0</al:X>
-                  <al:Y>1</al:Y>
-                  <al:Z>0</al:Z>
-                </al:Up>
-                <al:Gain>1</al:Gain>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="al:AudioResources">
-                <al:Buffers>
-                  <al:BufferConfiguration xsi:type="al:SoundBuffer">
-                    <al:Name>sound</al:Name>
-                    <al:FileName>C:\Users\ewell\Desktop\8port maze\PatternSeparation\Sound\sound10760Hz.wav</al:FileName>
-                  </al:BufferConfiguration>
-                </al:Buffers>
-                <al:Sources>
-                  <al:SourceConfiguration>
-                    <al:Name>soundSource</al:Name>
-                    <al:BufferName>sound</al:BufferName>
-                    <al:Gain>1</al:Gain>
-                    <al:Pitch>1</al:Pitch>
-                    <al:Direction>
-                      <al:X>0</al:X>
-                      <al:Y>0</al:Y>
-                      <al:Z>0</al:Z>
-                    </al:Direction>
-                    <al:Position>
-                      <al:X>0</al:X>
-                      <al:Y>0</al:Y>
-                      <al:Z>0</al:Z>
-                    </al:Position>
-                    <al:Velocity>
-                      <al:X>0</al:X>
-                      <al:Y>0</al:Y>
-                      <al:Z>0</al:Z>
-                    </al:Velocity>
-                    <al:Looping>true</al:Looping>
-                    <al:Relative>false</al:Relative>
-                    <al:State>Initial</al:State>
-                  </al:SourceConfiguration>
-                </al:Sources>
-              </Combinator>
-            </Expression>
-            <Expression xsi:type="Combinator">
-              <Combinator xsi:type="res:LoadResources" />
             </Expression>
             <Expression xsi:type="GroupWorkflow">
               <Name>Tracking</Name>
@@ -753,18 +598,15 @@ def process(value):
             <Edge From="5" To="6" Label="Source1" />
             <Edge From="6" To="7" Label="Source1" />
             <Edge From="7" To="8" Label="Source1" />
-            <Edge From="8" To="9" Label="Source1" />
-            <Edge From="9" To="14" Label="Source1" />
+            <Edge From="8" To="13" Label="Source1" />
+            <Edge From="9" To="10" Label="Source1" />
             <Edge From="10" To="11" Label="Source1" />
             <Edge From="11" To="12" Label="Source1" />
-            <Edge From="12" To="13" Label="Source1" />
-            <Edge From="13" To="14" Label="Source2" />
+            <Edge From="12" To="13" Label="Source2" />
+            <Edge From="13" To="14" Label="Source1" />
             <Edge From="14" To="15" Label="Source1" />
-            <Edge From="15" To="16" Label="Source1" />
+            <Edge From="16" To="17" Label="Source1" />
             <Edge From="17" To="18" Label="Source1" />
-            <Edge From="18" To="19" Label="Source1" />
-            <Edge From="21" To="22" Label="Source1" />
-            <Edge From="22" To="23" Label="Source1" />
           </Edges>
         </Workflow>
       </Expression>
